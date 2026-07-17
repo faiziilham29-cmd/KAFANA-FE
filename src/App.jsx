@@ -8,6 +8,7 @@ import AdminDataProperti from './pages/admindataproperti';
 import CariHunian from './pages/carihunian';
 import Login from './pages/login';
 import Register from './pages/register';
+import AdminLaporanKeuangan from './pages/adminlaporan';
 
 // Placeholder untuk halaman lain (biar routing ga error dulu)
 const BerandaUser = () => <div className="p-8 font-bold">Halaman Beranda User</div>;
@@ -36,6 +37,7 @@ export default function App() {
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/adminlaporan" element={<AdminLaporanKeuangan />} />
           
           {/* DIPERBAIKI: Mengubah path agar sinkron dengan '/admin/properti' tanpa spasi di ujung */}
           <Route path="/admin/properti" element={<AdminDataProperti />} />
