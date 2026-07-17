@@ -90,6 +90,9 @@ export default function Home() {
             <Link to="/admin" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-6 py-3 rounded-none transition duration-300 shadow-md">
               Eksplorasi Properti
             </Link>
+            <Link to="/login" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-6 py-3 rounded-none transition duration-300 shadow-md">
+              Login
+            </Link>
           </div>
         </div>
       </nav>
@@ -116,7 +119,7 @@ export default function Home() {
               <span className="text-[#B38E5D] text-lg">🔍</span>
               <input 
                 type="text" 
-                placeholder="Cari lokasi premium, Bojongsoang, Sukabirus..." 
+                placeholder="Cari Lokasi Bandung & Sukabumi" 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full py-3 bg-transparent placeholder-[#5C4A42]/50 text-[#2D2321] focus:outline-none font-sans text-sm"

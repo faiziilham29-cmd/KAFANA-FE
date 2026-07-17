@@ -7,7 +7,7 @@ export default function AdminDashboard() {
   // Data Dummy untuk Tabel Transaksi
   const recentTransactions = [
     { id: "INV-78299", name: "Nadilla Putri", location: "Kost Vista (Kamar 04)", type: "Kost Bulanan", status: "Lunas", date: "Jul 15, 2026", time: "10:15 AM", statusColor: "bg-emerald-100 text-emerald-700" },
-    { id: "INV-78298", name: "Kahfi Al-Fatih", location: "Kontrakan Famili (Bojongsoang)", type: "Sewa Tahunan", status: "Berjalan", date: "Jul 14, 2026", time: "09:30 AM", statusColor: "bg-blue-100 text-blue-700" },
+    { id: "INV-78298", name: "Kahfi Al-Fatih", location: "Kontrakan Famili (Bojongsoang)", type: "Sewa Tahunan", status: "Berjalan", date: "Jul 14, 2026", time: "09:30 AM", statusColor: "bg-[#F0E6D8] text-[#8B6B43]" },
     { id: "INV-78297", name: "Adesuwa Johnson", location: "Kost Muslimah (Kamar 12)", type: "Kost Bulanan", status: "Pending", date: "Jul 15, 2026", time: "08:00 AM", statusColor: "bg-amber-100 text-amber-700" },
     { id: "INV-78296", name: "Bima Arya", location: "Kost Singgah (Kamar 01)", type: "Kost Bulanan", status: "Lunas", date: "Jul 12, 2026", time: "14:20 PM", statusColor: "bg-emerald-100 text-emerald-700" },
     { id: "INV-78295", name: "Ezekiel Adegoke", location: "Kost Vista (Kamar 09)", type: "Kost Bulanan", status: "Dibatalkan", date: "Jul 10, 2026", time: "11:10 AM", statusColor: "bg-rose-100 text-rose-700" },
@@ -24,16 +24,16 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#F8F9FD] font-sans text-slate-800 overflow-hidden">
+    <div className="flex h-screen bg-[#FAF5EF] font-sans text-slate-800 overflow-hidden">
       
       {/* ================= SIDEBAR ================= */}
-      <aside className="w-64 bg-[#2A3F86] text-white flex flex-col justify-between shrink-0 h-full overflow-y-auto">
+      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto">
         <div>
           {/* Logo Brand */}
           <div className="h-20 flex items-center px-6 border-b border-white/10">
             <div className="text-xl font-bold tracking-wide flex items-center gap-2">
-              <svg className="w-6 h-6 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.7l6 5.3v9.5h-2v-6H8v6H6v-9.5l6-5.3z"/></svg>
-              <span>KAFANA<span className="text-amber-400">VISTA</span></span>
+              <svg className="w-6 h-6 text-[#B38E5D]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.7l6 5.3v9.5h-2v-6H8v6H6v-9.5l6-5.3z"/></svg>
+              <span>KAFANA<span className="text-[#B38E5D]">VISTA</span></span>
             </div>
           </div>
 
@@ -46,8 +46,8 @@ export default function AdminDashboard() {
                 onClick={() => setActiveMenu(menu.name)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                   activeMenu === menu.name 
-                    ? 'bg-[#4B62C8] text-white shadow-md' 
-                    : 'text-indigo-200 hover:bg-[#3950A2] hover:text-white'
+                    ? 'bg-[#B38E5D] text-white shadow-md' 
+                    : 'text-[#D7C4B0] hover:bg-[#3D2D29] hover:text-white'
                 }`}
               >
                 <svg className="w-5 h-5 opacity-90" fill="currentColor" viewBox="0 0 24 24">{menu.icon}</svg>
@@ -59,9 +59,9 @@ export default function AdminDashboard() {
 
         {/* Banner Promo Sidebar */}
         <div className="p-4 mb-4">
-          <div className="bg-[#3950A2] rounded-xl p-4 text-center">
-            <p className="text-xs font-semibold mb-3 leading-relaxed text-indigo-100">Cek status kost atau update ketersediaan kamar baru</p>
-            <div className="bg-white text-[#2A3F86] flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+          <div className="bg-[#3D2D29] rounded-xl p-4 text-center">
+            <p className="text-xs font-semibold mb-3 leading-relaxed text-[#D7C4B0]">Cek status kost atau update ketersediaan kamar baru</p>
+            <div className="bg-[#FAF5EF] text-[#261C19] flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer hover:opacity-90 transition">
               <span className="text-sm font-bold">Update Sekarang</span>
               <span>➔</span>
             </div>
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
             <input 
               type="text" 
               placeholder="Cari transaksi, penyewa, kamar..." 
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-16 py-2.5 text-sm focus:outline-none focus:border-[#4B62C8] transition"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-16 py-2.5 text-sm focus:outline-none focus:border-[#B38E5D] transition"
             />
             <span className="absolute right-3 top-2.5 text-xs text-slate-400 font-medium border border-slate-200 bg-white px-1.5 py-0.5 rounded">Ctrl + K</span>
           </div>
@@ -90,11 +90,11 @@ export default function AdminDashboard() {
               <svg className="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
               <span>Juli 15, 2026</span>
               <Link to="/home" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-5 py-3 transition duration-300 shadow-md">
-                            Keluar
-                </Link>
+                Keluar
+              </Link>
             </div>
             
-            <button className="relative p-2 text-slate-400 hover:text-slate-600 transition">
+            <button className="relative p-2 text-slate-400 hover:text-[#B38E5D] transition">
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
               <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full"></span>
             </button>
@@ -116,7 +116,7 @@ export default function AdminDashboard() {
               <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
               <p className="text-slate-500 mt-1">Overview operasional manajemen kost dan kontrakan</p>
             </div>
-            <select className="bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg px-4 py-2.5 outline-none shadow-sm cursor-pointer hover:border-slate-300">
+            <select className="bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg px-4 py-2.5 outline-none shadow-sm cursor-pointer hover:border-[#B38E5D]">
               <option>Minggu Ini</option>
               <option>Bulan Ini</option>
               <option>Tahun Ini</option>
@@ -127,7 +127,7 @@ export default function AdminDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between relative overflow-hidden">
               <div className="flex gap-4 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-[#F0E6D8] flex items-center justify-center text-[#B38E5D] shrink-0">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 </div>
                 <div>
@@ -138,7 +138,7 @@ export default function AdminDashboard() {
               <div className="flex items-end justify-between mt-4 z-10">
                 <span className="text-xs font-semibold text-emerald-500 bg-emerald-50 px-2 py-1 rounded">↑ 5% <span className="text-slate-400 font-normal">vs bulan lalu</span></span>
               </div>
-              <svg className="absolute bottom-0 right-0 w-32 h-16 text-blue-100/50" preserveAspectRatio="none" viewBox="0 0 100 100"><path fill="currentColor" d="M0,100 C20,80 40,90 60,60 C80,30 90,40 100,20 L100,100 Z" /></svg>
+              <svg className="absolute bottom-0 right-0 w-32 h-16 text-[#F0E6D8]/50" preserveAspectRatio="none" viewBox="0 0 100 100"><path fill="currentColor" d="M0,100 C20,80 40,90 60,60 C80,30 90,40 100,20 L100,100 Z" /></svg>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between relative overflow-hidden">
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                   <span>Filter</span>
                 </button>
-                <button className="flex items-center gap-2 px-4 py-2 bg-[#4B62C8] hover:bg-[#3950A2] text-white font-medium text-sm rounded-lg transition shadow-sm">
+                <button className="flex items-center gap-2 px-4 py-2 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-medium text-sm rounded-lg transition shadow-sm">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                   <span>Export</span>
                 </button>
@@ -213,7 +213,7 @@ export default function AdminDashboard() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm whitespace-nowrap">
-                <thead className="bg-[#F8F9FD] text-slate-600 font-semibold border-b border-slate-200">
+                <thead className="bg-[#FAF5EF] text-slate-600 font-semibold border-b border-slate-200">
                   <tr>
                     <th className="px-6 py-4">ID Order</th>
                     <th className="px-6 py-4">Nama Penyewa</th>
@@ -227,7 +227,7 @@ export default function AdminDashboard() {
                 <tbody className="divide-y divide-slate-100">
                   {recentTransactions.map((tx, index) => (
                     <tr key={index} className="hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 font-semibold text-[#4B62C8]">{tx.id}</td>
+                      <td className="px-6 py-4 font-semibold text-[#B38E5D]">{tx.id}</td>
                       <td className="px-6 py-4 font-medium text-slate-800">{tx.name}</td>
                       <td className="px-6 py-4 flex items-center gap-2">
                         <svg className="w-4 h-4 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
@@ -244,7 +244,7 @@ export default function AdminDashboard() {
                         <div className="text-xs text-slate-400">{tx.time}</div>
                       </td>
                       <td className="px-6 py-4 text-center">
-                        <button className="p-1.5 text-slate-400 hover:text-[#4B62C8] hover:bg-slate-100 rounded transition">
+                        <button className="p-1.5 text-slate-400 hover:text-[#B38E5D] hover:bg-slate-100 rounded transition">
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
                         </button>
                       </td>
@@ -258,7 +258,7 @@ export default function AdminDashboard() {
               <div>Menampilkan 1 hingga 5 dari 30 entri data</div>
               <div className="flex items-center gap-2">
                 <button className="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-100">&lt;</button>
-                <button className="w-8 h-8 flex items-center justify-center rounded bg-[#4B62C8] text-white font-bold">1</button>
+                <button className="w-8 h-8 flex items-center justify-center rounded bg-[#B38E5D] text-white font-bold">1</button>
                 <button className="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-100">2</button>
                 <button className="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-100">3</button>
                 <span className="px-2">...</span>

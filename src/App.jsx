@@ -6,6 +6,8 @@ import UserProfile from './pages/profil';       // Jalur file profil
 import AdminDashboard from './pages/admindashboard';
 import AdminDataProperti from './pages/admindataproperti';
 import CariHunian from './pages/carihunian';
+import Login from './pages/login';
+import Register from './pages/register';
 
 // Placeholder untuk halaman lain (biar routing ga error dulu)
 const BerandaUser = () => <div className="p-8 font-bold">Halaman Beranda User</div>;
@@ -29,6 +31,8 @@ export default function App() {
           <Route path="/beranda" element={<BerandaUser />} />
           <Route path="/finance" element={<TrackFinanceUser />} />
           <Route path="/carihunian" element={<CariHunian />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
