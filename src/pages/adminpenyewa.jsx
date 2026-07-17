@@ -1,0 +1,258 @@
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
+export default function AdminPenyewa() {
+  const location = useLocation();
+
+  // 1. DUMMY DATA UNTUK PENYEWA AKTIF
+  const [tenants, setTenants] = useState([
+    { id: "TEN-001", name: "Nadilla Putri", room: "Kost Vista (Kamar 04)", phone: "081234567890", entryDate: "10 Agustus 2025", endDate: "10 Agustus 2026", status: "Aktif" },
+    { id: "TEN-002", name: "Kahfi Al-Fatih", room: "Kontrakan Famili", phone: "089876543210", entryDate: "15 Januari 2024", endDate: "15 Januari 2027", status: "Aktif" },
+    { id: "TEN-003", name: "Adesuwa Johnson", room: "Kost Muslimah (Kamar 12)", phone: "081122334455", entryDate: "01 Februari 2026", endDate: "31 Juli 2026", status: "Akan Habis" },
+    { id: "TEN-004", name: "Bima Arya", room: "Kost Singgah (Kamar 01)", phone: "085566778899", entryDate: "20 Mei 2026", endDate: "20 November 2026", status: "Aktif" },
+    { id: "TEN-005", name: "Siti Aminah", room: "Paviliun Keluarga C", phone: "087711223344", entryDate: "05 Juli 2026", endDate: "05 Juli 2027", status: "Baru" },
+  ]);
+
+  // 2. STATE UNTUK PENCARIAN & FILTER
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState("Semua");
+
+  // Logika Pencarian dan Filter
+  const filteredTenants = tenants.filter(tenant => {
+    const matchesSearch = tenant.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          tenant.room.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = filterStatus === "Semua" ? true : tenant.status === filterStatus;
+    return matchesSearch && matchesStatus;
+  });
+
+  // Kalkulasi Summary
+  const totalAktif = tenants.filter(t => t.status === "Aktif" || t.status === "Baru").length;
+  const totalAkanHabis = tenants.filter(t => t.status === "Akan Habis").length;
+  const totalBaru = tenants.filter(t => t.status === "Baru").length;
+
+  // Array Menu Sidebar
+  const sidebarMenus = [
+    { name: 'Dashboard', path: '/admin', icon: <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/> },
+    { name: 'Data Properti', path: '/admin/properti', icon: <path d="M17 10H7v2h10v-2zm2-7h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-5H7v2h7v-2z"/> },
+    { name: 'Penyewa Aktif', path: '/admin/penyewa', icon: <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/> },
+    { name: 'Tagihan & Order', path: '/admin/tagihan', icon: <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/> },
+    { name: 'Laporan', path: '/admin/laporan', icon: <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/> },
+    { name: 'Pengaturan', path: '#', icon: <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 C9.69,21.83,9.89,22,10.13,22h3.84c0.24,0,0.44-0.17,0.48-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/> },
+  ];
+
+  return (
+    <div className="flex h-screen bg-[#FAF5EF] font-sans text-slate-800 overflow-hidden relative">
+      
+      {/* ================= SIDEBAR ================= */}
+      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto">
+        <div>
+          <div className="h-20 flex items-center px-6 border-b border-white/10">
+            <div className="text-xl font-bold tracking-wide flex items-center gap-2">
+              <svg className="w-6 h-6 text-[#B38E5D]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.7l6 5.3v9.5h-2v-6H8v6H6v-9.5l6-5.3z"/></svg>
+              <span>KAFANA<span className="text-[#B38E5D]">VISTA</span></span>
+            </div>
+          </div>
+          <nav className="p-4 space-y-1 mt-2">
+            {sidebarMenus.map((menu) => (
+              <Link
+                to={menu.path}
+                key={menu.name}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  location.pathname === menu.path || menu.name === 'Penyewa Aktif'
+                    ? 'bg-[#B38E5D] text-white shadow-md' 
+                    : 'text-[#D7C4B0] hover:bg-[#3D2D29] hover:text-white'
+                }`}
+              >
+                <svg className="w-5 h-5 opacity-90" fill="currentColor" viewBox="0 0 24 24">{menu.icon}</svg>
+                <span>{menu.name}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+        
+        <div className="p-4 mb-4">
+          <div className="bg-[#3D2D29] rounded-xl p-4 text-center">
+            <p className="text-xs font-semibold mb-3 leading-relaxed text-[#D7C4B0]">Cek status kost atau update ketersediaan kamar baru</p>
+            <div className="bg-[#FAF5EF] text-[#261C19] flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer hover:opacity-90 transition">
+              <span className="text-sm font-bold">Update Sekarang</span>
+              <span>➔</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {/* ================= MAIN CONTENT ================= */}
+      <main className="flex-1 flex flex-col h-full overflow-hidden">
+        
+        {/* HEADER */}
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm">
+          <div className="relative w-96 hidden md:block">
+            <svg className="w-5 h-5 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input 
+              type="text" 
+              placeholder="Cari nama penyewa atau kamar..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#B38E5D] transition"
+            />
+          </div>
+          <div className="flex items-center gap-6 ml-auto">
+            <div className="flex items-center gap-2 text-slate-600 font-medium text-sm">
+              <svg className="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+              <span>Juli 17, 2026</span>
+              <Link to="/" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-5 py-3 transition duration-300 shadow-md ml-2 rounded">
+                Keluar
+              </Link>
+            </div>
+            <Link to="/profile" className="flex items-center gap-3 border-l border-slate-200 pl-6 cursor-pointer hover:opacity-80 transition">
+              <div className="text-right hidden md:block">
+                <p className="text-sm font-bold text-slate-800">M. Faiz Ilham</p>
+                <p className="text-xs text-slate-500">Head Admin</p>
+              </div>
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" alt="Admin" className="w-10 h-10 rounded-full object-cover border border-slate-200" />
+            </Link>
+          </div>
+        </header>
+
+        {/* CONTENT */}
+        <div className="flex-1 overflow-y-auto p-8">
+          
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-[#261C19] tracking-tight">Data Penyewa</h1>
+              <p className="text-slate-500 mt-1">Kelola data penghuni kost dan kontrakan yang sedang aktif.</p>
+            </div>
+            
+            <button className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition shadow-md shadow-[#B38E5D]/30">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
+              <span>Tambah Penyewa</span>
+            </button>
+          </div>
+
+          {/* SUMMARY CARDS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Total Penghuni Aktif</p>
+              </div>
+              <h3 className="text-3xl font-black text-[#261C19] mt-1">{totalAktif} Orang</h3>
+            </div>
+            
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                </div>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-500">Kontrak Segera Habis</p>
+              </div>
+              <h3 className="text-3xl font-black text-[#261C19] mt-1">{totalAkanHabis} Penghuni</h3>
+            </div>
+            
+            <div className="bg-[#261C19] p-5 rounded-2xl border border-[#3D2D29] shadow-md flex flex-col justify-between relative overflow-hidden">
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-[#B38E5D]/20 text-[#B38E5D] rounded-lg">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                  </div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#D7C4B0]">Penghuni Baru (Bulan Ini)</p>
+                </div>
+                <h3 className="text-3xl font-black text-[#FAF5EF] mt-1">{totalBaru} Masuk</h3>
+              </div>
+              <svg className="absolute bottom-0 right-0 w-32 h-24 text-[#3D2D29] opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100"><path fill="currentColor" d="M0,100 C20,80 40,90 60,60 C80,30 90,40 100,20 L100,100 Z" /></svg>
+            </div>
+          </div>
+
+          {/* TABEL DATA PENYEWA */}
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 bg-[#FAF5EF]/50">
+              <h2 className="text-lg font-bold text-[#261C19]">Daftar Penyewa</h2>
+              
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-slate-500 font-medium">Filter Status:</span>
+                <select 
+                  value={filterStatus}
+                  onChange={(e) => setFilterStatus(e.target.value)}
+                  className="bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg px-3 py-1.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D]"
+                >
+                  <option value="Semua">Semua Penyewa</option>
+                  <option value="Aktif">Aktif</option>
+                  <option value="Baru">Baru Masuk</option>
+                  <option value="Akan Habis">Akan Habis</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm whitespace-nowrap">
+                <thead className="bg-white text-slate-600 font-semibold border-b border-slate-200">
+                  <tr>
+                    <th className="px-6 py-4">Nama Lengkap</th>
+                    <th className="px-6 py-4">Properti / Kamar</th>
+                    <th className="px-6 py-4">No. HP / WA</th>
+                    <th className="px-6 py-4">Tanggal Masuk</th>
+                    <th className="px-6 py-4">Batas Kontrak</th>
+                    <th className="px-6 py-4">Status</th>
+                    <th className="px-6 py-4 text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {filteredTenants.length > 0 ? filteredTenants.map((tenant, index) => (
+                    <tr key={index} className="hover:bg-slate-50 transition">
+                      <td className="px-6 py-4 font-bold text-[#261C19] flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-[#FAF5EF] text-[#B38E5D] border border-[#D7C4B0] flex items-center justify-center font-bold text-xs">
+                          {tenant.name.charAt(0)}
+                        </div>
+                        {tenant.name}
+                      </td>
+                      <td className="px-6 py-4 text-slate-600 font-medium">{tenant.room}</td>
+                      <td className="px-6 py-4 text-slate-600">{tenant.phone}</td>
+                      <td className="px-6 py-4 text-slate-500">{tenant.entryDate}</td>
+                      <td className="px-6 py-4 font-semibold text-[#B38E5D]">{tenant.endDate}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${
+                          tenant.status === 'Aktif' ? 'bg-emerald-100 text-emerald-700' :
+                          tenant.status === 'Baru' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'
+                        }`}>
+                          {tenant.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center justify-center gap-2">
+                          <button className="px-3 py-1.5 text-xs font-bold text-white bg-[#B38E5D] hover:bg-[#8F6E45] rounded transition shadow-sm" title="Lihat Profil">
+                            Detail
+                          </button>
+                          <button className="px-3 py-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-500 hover:text-white rounded transition" title="Chat WhatsApp">
+                            Hubungi
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  )) : (
+                    <tr>
+                      <td colSpan="7" className="px-6 py-12 text-center text-slate-400 font-medium">Tidak ada data penyewa yang sesuai dengan pencarian atau filter.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            
+            {/* Pagination */}
+            <div className="p-5 border-t border-slate-100 flex items-center justify-between text-sm text-slate-500 bg-white">
+              <div>Menampilkan {filteredTenants.length} data penyewa</div>
+              <div className="flex items-center gap-1">
+                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-400">&lt;</button>
+                <button className="px-3 py-1 rounded bg-[#B38E5D] text-white font-bold">1</button>
+                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-400">&gt;</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </main>
+
+    </div>
+  );
+}
