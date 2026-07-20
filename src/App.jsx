@@ -11,6 +11,8 @@ import Register from './pages/register';
 import AdminLaporanKeuangan from './pages/adminlaporan';
 import AdminTagihanOrder from './pages/adminTO';
 import AdminPenyewa from './pages/adminpenyewa';
+import AdminPengaturan from './pages/adminpengaturan';
+import Pembayaran from './pages/pembayaran';
 
 // Placeholder untuk halaman lain (biar routing ga error dulu)
 const BerandaUser = () => <div className="p-8 font-bold">Halaman Beranda User</div>;
@@ -36,12 +38,14 @@ export default function App() {
           <Route path="/carihunian" element={<CariHunian />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/pembayaran" element={<Pembayaran />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/adminlaporan" element={<AdminLaporanKeuangan />} />
           <Route path="/adminTO" element={<AdminTagihanOrder />} />
           <Route path="/adminpenyewa" element={<AdminPenyewa />} />
+          <Route path="/adminpengaturan" element={<AdminPengaturan />} />
           
           {/* DIPERBAIKI: Mengubah path agar sinkron dengan '/admin/properti' tanpa spasi di ujung */}
           <Route path="/admin/properti" element={<AdminDataProperti />} />

@@ -10,52 +10,52 @@ export default function Home() {
   const premiumRooms = [
     {
       id: 1,
-      name: "NAFA PRISTIANI ANJANI",
+      name: "IZREVI ANDARA VISTA",
       category: "Kost",
       gender: "Putri",
-      price: "Rp 1.500.000",
+      price: "Rp 7.000.000",
       period: "bulan",
-      location: "Cimahi, Bandung",
-      image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80",
+      location: "Lembang, Bandung",
+      image: "/KOST ANDARA VISTA.png",
       rating: "4.9",
-      badge: "Sisa 2 Kamar!",
+      badge: "Exclusif",
       desc: "Nikmati hunian eksklusif dengan fasilitas lengkap standar hotel bintang lima, sangat dekat dengan area kampus."
-    },
+    },  
     {
       id: 2,
       name: "PURI ANDRA KAHFI",
-      category: "Kontrakan",
+      category: "Kost",
       gender: "Campur",
       price: "Rp 2.500.000",
       period: "bulan",
       location: "Buah Batu, Bandung",
-      image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80",
+      image: "/Kost Depan gua.jpg",
       rating: "4.8",
       badge: "Diskon Khusus",
       desc: "Hunian keluarga bernuansa asri dengan desain modern minimalis, keamanan 24 jam, dan carport luas."
     },
     {
       id: 3,
-      name: "ACA VISTA",
-      category: "Kontrakan",
+      name: "NADILLA HOUSE PRISTIANI",
+      category: "Kost",
       gender: "Campur/Family",
       price: "Rp 1.000.000",
       period: "bulan",
       location: "Limusnunggal, Sukabumi",
-      image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80",
+      image: "/Kost Depan nafa.jpg",
       rating: "4.8",
       badge: "Terpopuler",
       desc: "Kontrakan dengan lingkungan yang tenang, aman, bersih, serta dilengkapi dapur bersama super nyaman."
     },
     {
       id: 4,
-      name: "FAIZ HOUSE KV",
-      category: "Kost",
-      gender: "Putra",
+      name: "ACA VISTA",
+      category: "Kontrakan",
+      gender: "Campur",
       price: "Rp 5.000.000",
       period: "bulan",
       location: "Nanggleng, Sukabumi",
-      image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=600&q=80",
+      image: "/KONTRAK ACA.png",
       rating: "5.0",
       badge: "Sisa 1 Kamar!",
       desc: "Kamar sewa khusus putra dengan suasana modern, fasilitas Wi-Fi kecepatan tinggi, dan parkiran motor yang luas."
@@ -219,8 +219,8 @@ export default function Home() {
                     <span className="font-sans text-[9px] text-[#5C4A42]/60 uppercase block">Harga Sewa</span>
                     <span className="text-base font-bold text-[#2D2321]">{room.price} <span className="font-sans text-xs text-[#5C4A42] font-normal">/{room.period}</span></span>
                   </div>
-                  <Link to="/beranda" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-4 py-3 transition duration-300">
-                    Detail Kost
+                  <Link to="/login" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-4 py-3 transition duration-300">
+                    BOOK
                   </Link>
                 </div>
               </div>
