@@ -220,7 +220,7 @@ export default function Home() {
                     <span className="text-base font-bold text-[#2D2321]">{room.price} <span className="font-sans text-xs text-[#5C4A42] font-normal">/{room.period}</span></span>
                   </div>
                   <Link to="/beranda" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-4 py-3 transition duration-300">
-                    Book Now
+                    Detail Kost
                   </Link>
                 </div>
               </div>
