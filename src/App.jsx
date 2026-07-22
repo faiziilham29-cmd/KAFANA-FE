@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/landingpages'; // Landing Page awal
+import LandingPage from './pages/landingpages'; 
 import Home from './pages/home';
-import UserProfile from './pages/profil';       // Jalur file profil
+import UserProfile from './pages/profil';       
 import AdminDashboard from './pages/admindashboard';
 import AdminDataProperti from './pages/admindataproperti';
 import CariHunian from './pages/carihunian';
@@ -13,10 +13,11 @@ import AdminTagihanOrder from './pages/adminTO';
 import AdminPenyewa from './pages/adminpenyewa';
 import AdminPengaturan from './pages/adminpengaturan';
 import Pembayaran from './pages/pembayaran';
+// PASTIKAN IMPORT INI ADA:
+import FinanceTracker from './pages/FinanceTracker';
 
-// Placeholder untuk halaman lain (biar routing ga error dulu)
+// Placeholder untuk beranda user saja (yang finance udah dihapus)
 const BerandaUser = () => <div className="p-8 font-bold">Halaman Beranda User</div>;
-const TrackFinanceUser = () => <div className="p-8 font-bold">Halaman Track Finance User</div>;
 
 export default function App() {
   return (
@@ -29,25 +30,26 @@ export default function App() {
           {/* Halaman Home bertema Seaside */}
           <Route path="/home" element={<Home />} />
           
-          {/* Rute tunggal yang benar untuk halaman profile */}
+          {/* Rute profil */}
           <Route path="/profile" element={<UserProfile />} />
           
           {/* User Routes */}
           <Route path="/beranda" element={<BerandaUser />} />
-          <Route path="/finance" element={<TrackFinanceUser />} />
+          
+          {/* 👇 INI YANG DIPERBAIKI: Panggil komponen aslinya <FinanceTracker /> */}
+          <Route path="/FinanceTracker" element={<FinanceTracker />} />
+          
           <Route path="/carihunian" element={<CariHunian />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/pembayaran" element={<Pembayaran />} />
-          
+
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/adminlaporan" element={<AdminLaporanKeuangan />} />
           <Route path="/adminTO" element={<AdminTagihanOrder />} />
           <Route path="/adminpenyewa" element={<AdminPenyewa />} />
           <Route path="/adminpengaturan" element={<AdminPengaturan />} />
-          
-          {/* DIPERBAIKI: Mengubah path agar sinkron dengan '/admin/properti' tanpa spasi di ujung */}
           <Route path="/admin/properti" element={<AdminDataProperti />} />
         </Routes>
       </div>

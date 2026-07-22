@@ -83,7 +83,7 @@ export default function Home() {
           <div className="hidden md:flex space-x-8 font-sans text-xs uppercase tracking-widest font-semibold text-[#5C4A42]">
             <Link to="/" className="text-[#B38E5D] transition border-b border-[#B38E5D] pb-1">Home</Link>
             <Link to="/carihunian" className="hover:text-[#B38E5D] transition pb-1">Cari Hunian</Link>
-            <Link to="/finance" className="hover:text-[#B38E5D] transition pb-1">Finance Tracker</Link>
+            <Link to="/FinanceTracker" className="hover:text-[#B38E5D] transition pb-1">Finance Tracker</Link>
             <Link to="/profile" className="hover:text-[#B38E5D] transition pb-1">Profil Saya</Link>
           </div>
           <div>
