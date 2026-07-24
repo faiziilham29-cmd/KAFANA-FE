@@ -94,28 +94,45 @@ export default function Pembayaran() {
   };
 
   return (
-    <div className="min-h-screen bg-[#14110F] text-[#FAF8F5] font-sans p-6 md:p-10 antialiased">
+    <div className="min-h-screen bg-[#FAF5EF] text-[#2D2321] font-sans p-6 md:p-10 antialiased selection:bg-[#B38E5D] selection:text-white overflow-hidden">
+      
+      {/* CSS Animasi Internal (Simple & Elegan) */}
+      <style>
+        {`
+          @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-up {
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0; /* Mulai dari invisible */
+          }
+          .delay-100 { animation-delay: 150ms; }
+          .delay-200 { animation-delay: 300ms; }
+        `}
+      </style>
+
       <div className="max-w-6xl mx-auto">
         
         {/* HEADER */}
-        <div className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-serif tracking-wide text-[#FAF8F5]">Konfirmasi Pembayaran</h1>
-          <p className="text-xs text-stone-400 mt-1">Selesaikan pembayaran untuk mengamankan kamar pesanan Anda.</p>
+        <div className="mb-8 animate-fade-up">
+          <h1 className="text-2xl md:text-3xl font-serif font-bold tracking-wide text-[#2D2321]">Konfirmasi Pembayaran</h1>
+          <p className="text-xs text-[#5C4A42] mt-1 font-sans">Selesaikan pembayaran untuk mengamankan kamar pesanan Anda.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 animate-fade-up delay-100">
             
             {/* 1. PILIH METODE PEMBAYARAN */}
-            <div className="bg-[#1D1916] border border-[#8C6943]/20 p-6 space-y-6">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-[#B48A35]">
+            <div className="bg-white border border-[#D7C4B0] p-6 space-y-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#B38E5D]">
                 1. PILIH METODE PEMBAYARAN
               </h2>
 
               {/* VIRTUAL ACCOUNT */}
               <div className="space-y-3">
-                <span className="text-[10px] font-bold tracking-wider text-stone-400 uppercase block">
+                <span className="text-[10px] font-bold tracking-wider text-[#5C4A42] uppercase block">
                   TRANSFER VIRTUAL ACCOUNT / BANK:
                 </span>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -123,16 +140,16 @@ export default function Pembayaran() {
                     <button
                       key={bank.id}
                       onClick={() => setMetodeAktif(bank)}
-                      className={`flex items-center gap-3 p-3 border text-xs text-left transition-all cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 border text-xs text-left transition-all duration-300 cursor-pointer rounded-lg hover:-translate-y-0.5 ${
                         metodeAktif.id === bank.id
-                          ? 'border-[#B48A35] bg-[#B48A35]/10 text-white font-bold'
-                          : 'border-[#8C6943]/30 bg-[#1A1613] text-stone-300 hover:border-[#8C6943]'
+                          ? 'border-[#B38E5D] bg-[#B38E5D]/10 text-[#2D2321] font-bold shadow-sm'
+                          : 'border-[#D7C4B0] bg-[#FAF5EF]/50 text-[#5C4A42] hover:border-[#B38E5D] hover:shadow-sm'
                       }`}
                     >
-                      <div className={`w-3 h-3 rounded-full border flex items-center justify-center ${
-                        metodeAktif.id === bank.id ? 'border-[#B48A35] bg-[#B48A35]' : 'border-stone-500'
+                      <div className={`w-3 h-3 rounded-full border flex items-center justify-center transition-colors duration-300 ${
+                        metodeAktif.id === bank.id ? 'border-[#B38E5D] bg-[#B38E5D]' : 'border-slate-400'
                       }`}>
-                        {metodeAktif.id === bank.id && <div className="w-1 h-1 bg-[#1A1613] rounded-full"></div>}
+                        {metodeAktif.id === bank.id && <div className="w-1 h-1 bg-white rounded-full"></div>}
                       </div>
                       <span>{bank.nama}</span>
                     </button>
@@ -142,7 +159,7 @@ export default function Pembayaran() {
 
               {/* QRIS & E-WALLET */}
               <div className="space-y-3">
-                <span className="text-[10px] font-bold tracking-wider text-stone-400 uppercase block">
+                <span className="text-[10px] font-bold tracking-wider text-[#5C4A42] uppercase block">
                   QRIS &amp; E-WALLET:
                 </span>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -150,19 +167,19 @@ export default function Pembayaran() {
                     <button
                       key={qris.id}
                       onClick={() => setMetodeAktif(qris)}
-                      className={`flex items-center gap-3 p-3 border text-xs text-left transition-all cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 border text-xs text-left transition-all duration-300 cursor-pointer rounded-lg hover:-translate-y-0.5 ${
                         metodeAktif.id === qris.id
-                          ? 'border-[#B48A35] bg-[#B48A35]/10 text-white font-bold'
-                          : 'border-[#8C6943]/30 bg-[#1A1613] text-stone-300 hover:border-[#8C6943]'
+                          ? 'border-[#B38E5D] bg-[#B38E5D]/10 text-[#2D2321] font-bold shadow-sm'
+                          : 'border-[#D7C4B0] bg-[#FAF5EF]/50 text-[#5C4A42] hover:border-[#B38E5D] hover:shadow-sm'
                       }`}
                     >
-                      <div className={`w-3 h-3 rounded-full border flex items-center justify-center ${
-                        metodeAktif.id === qris.id ? 'border-[#B48A35] bg-[#B48A35]' : 'border-stone-500'
+                      <div className={`w-3 h-3 rounded-full border flex items-center justify-center transition-colors duration-300 ${
+                        metodeAktif.id === qris.id ? 'border-[#B38E5D] bg-[#B38E5D]' : 'border-slate-400'
                       }`}>
-                        {metodeAktif.id === qris.id && <div className="w-1 h-1 bg-[#1A1613] rounded-full"></div>}
+                        {metodeAktif.id === qris.id && <div className="w-1 h-1 bg-white rounded-full"></div>}
                       </div>
                       <span className="flex items-center gap-1.5">
-                        <span className="text-[10px] bg-purple-900/60 border border-purple-500/40 text-purple-200 px-1 rounded font-mono">QR</span>
+                        <span className="text-[10px] bg-[#B38E5D]/20 border border-[#B38E5D]/40 text-[#2D2321] px-1 rounded font-mono font-bold">QR</span>
                         {qris.nama}
                       </span>
                     </button>
@@ -172,7 +189,7 @@ export default function Pembayaran() {
 
               {/* LAINNYA */}
               <div className="space-y-3">
-                <span className="text-[10px] font-bold tracking-wider text-stone-400 uppercase block">
+                <span className="text-[10px] font-bold tracking-wider text-[#5C4A42] uppercase block">
                   LAINNYA:
                 </span>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -180,16 +197,16 @@ export default function Pembayaran() {
                     <button
                       key={lain.id}
                       onClick={() => setMetodeAktif(lain)}
-                      className={`flex items-center gap-3 p-3 border text-xs text-left transition-all cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 border text-xs text-left transition-all duration-300 cursor-pointer rounded-lg hover:-translate-y-0.5 ${
                         metodeAktif.id === lain.id
-                          ? 'border-[#B48A35] bg-[#B48A35]/10 text-white font-bold'
-                          : 'border-[#8C6943]/30 bg-[#1A1613] text-stone-300 hover:border-[#8C6943]'
+                          ? 'border-[#B38E5D] bg-[#B38E5D]/10 text-[#2D2321] font-bold shadow-sm'
+                          : 'border-[#D7C4B0] bg-[#FAF5EF]/50 text-[#5C4A42] hover:border-[#B38E5D] hover:shadow-sm'
                       }`}
                     >
-                      <div className={`w-3 h-3 rounded-full border flex items-center justify-center ${
-                        metodeAktif.id === lain.id ? 'border-[#B48A35] bg-[#B48A35]' : 'border-stone-500'
+                      <div className={`w-3 h-3 rounded-full border flex items-center justify-center transition-colors duration-300 ${
+                        metodeAktif.id === lain.id ? 'border-[#B38E5D] bg-[#B38E5D]' : 'border-slate-400'
                       }`}>
-                        {metodeAktif.id === lain.id && <div className="w-1 h-1 bg-[#1A1613] rounded-full"></div>}
+                        {metodeAktif.id === lain.id && <div className="w-1 h-1 bg-white rounded-full"></div>}
                       </div>
                       <span>{lain.nama}</span>
                     </button>
@@ -200,30 +217,30 @@ export default function Pembayaran() {
             </div>
 
             {/* 2. PETUNJUK PEMBAYARAN */}
-            <div className="bg-[#1D1916] border border-[#8C6943]/20 p-6 space-y-6">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-[#B48A35]">
+            <div className="bg-white border border-[#D7C4B0] p-6 space-y-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#B38E5D]">
                 2. PETUNJUK PEMBAYARAN ({metodeAktif.nama.toUpperCase()})
               </h2>
 
               {/* PETUNJUK BANK */}
               {metodeAktif.jenis === 'bank' && (
-                <div className="space-y-6">
+                <div className="space-y-6 animate-fade-up">
                   <div className="space-y-4 text-xs">
-                    <div className="flex justify-between items-center py-2 border-b border-[#8C6943]/10">
-                      <span className="text-stone-400">Bank / Penyedia:</span>
-                      <span className="font-bold text-stone-100 uppercase">{metodeAktif.nama.replace('Bank ', '')}</span>
+                    <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                      <span className="text-[#5C4A42]">Bank / Penyedia:</span>
+                      <span className="font-bold text-[#2D2321] uppercase">{metodeAktif.nama.replace('Bank ', '')}</span>
                     </div>
-                    <div className="flex justify-between items-center py-2 border-b border-[#8C6943]/10">
-                      <span className="text-stone-400">Atas Nama:</span>
-                      <span className="font-bold text-stone-100">Sakinah Kos &amp; Kontrakan</span>
+                    <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                      <span className="text-[#5C4A42]">Atas Nama:</span>
+                      <span className="font-bold text-[#2D2321]">Kafana Vista Property</span>
                     </div>
                     <div className="pt-2">
-                      <span className="text-stone-400 block mb-1 uppercase text-[10px] tracking-wider">NOMOR REKENING / VA:</span>
-                      <div className="flex justify-between items-center bg-[#14110F] p-3 border border-[#8C6943]/20">
-                        <span className="font-mono text-lg font-bold text-[#B48A35] tracking-wider">{metodeAktif.nomorVa}</span>
+                      <span className="text-[#5C4A42] block mb-1 uppercase text-[10px] tracking-wider font-bold">NOMOR REKENING / VA:</span>
+                      <div className="flex justify-between items-center bg-[#FAF5EF] p-3 border border-[#D7C4B0] rounded-lg">
+                        <span className="font-mono text-lg font-bold text-[#B38E5D] tracking-wider">{metodeAktif.nomorVa}</span>
                         <button
                           onClick={handleCopy}
-                          className="border border-[#B48A35] text-[#B48A35] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider hover:bg-[#B48A35] hover:text-[#1A1613] transition-all cursor-pointer"
+                          className="border border-[#B38E5D] text-[#B38E5D] px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider hover:bg-[#B38E5D] hover:text-white transition-all cursor-pointer rounded"
                         >
                           {copied ? 'TERSALIN!' : 'SALIN REKENING'}
                         </button>
@@ -233,24 +250,24 @@ export default function Pembayaran() {
                 </div>
               )}
 
-              {/* PETUNJUK QRIS (BERUBAH SETIAP OPSI DIKLIK) */}
+              {/* PETUNJUK QRIS */}
               {metodeAktif.jenis === 'qris' && (
-                <div className="text-center space-y-4 py-2">
-                  <p className="text-xs text-[#B48A35] font-bold">
+                <div className="text-center space-y-4 py-2 animate-fade-up">
+                  <p className="text-xs text-[#B38E5D] font-bold">
                     Scan QRIS Code khusus {metodeAktif.nama} berikut:
                   </p>
-                  <div className="inline-block bg-white p-4 border-4 border-[#B48A35]/40 shadow-2xl rounded-sm">
+                  <div className="inline-block bg-white p-4 border-4 border-[#B38E5D]/40 shadow-xl rounded-lg transform transition-transform hover:scale-105 duration-500">
                     <img 
-                      key={metodeAktif.id} // Key memaksa gambar beranimasi/refresh saat ganti opsi
+                      key={metodeAktif.id}
                       src={getDynamicQrUrl()} 
                       alt={`QRIS ${metodeAktif.nama}`} 
                       className="w-52 h-52 object-contain mx-auto"
                     />
-                    <span className="block text-[10px] text-black font-mono font-bold mt-2">
+                    <span className="block text-[10px] text-[#2D2321] font-mono font-bold mt-2">
                       NMID: {metodeAktif.nmid}
                     </span>
                   </div>
-                  <p className="text-[11px] text-stone-400">
+                  <p className="text-[11px] text-[#5C4A42]">
                     Buka aplikasi {metodeAktif.nama.replace('QRIS ', '')} / m-Banking &gt; Pilih Scan QRIS &gt; Selesaikan Pembayaran
                   </p>
                 </div>
@@ -258,25 +275,25 @@ export default function Pembayaran() {
 
               {/* PETUNJUK RETAIL/CASH */}
               {(metodeAktif.jenis === 'retail' || metodeAktif.jenis === 'cash') && (
-                <div className="space-y-4 text-xs">
-                  <div className="flex justify-between items-center py-2 border-b border-[#8C6943]/10">
-                    <span className="text-stone-400">Metode:</span>
-                    <span className="font-bold text-stone-100">{metodeAktif.nama}</span>
+                <div className="space-y-4 text-xs animate-fade-up">
+                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span className="text-[#5C4A42]">Metode:</span>
+                    <span className="font-bold text-[#2D2321]">{metodeAktif.nama}</span>
                   </div>
-                  <div className="bg-[#14110F] p-4 border border-[#8C6943]/20">
-                    <span className="text-stone-400 block text-[10px] uppercase">Kode Pembayaran / Instruksi:</span>
-                    <span className="font-mono text-base font-bold text-[#B48A35]">{metodeAktif.kodePay || 'Tunjukkan Email Pemesanan ke Kasir/Pengelola'}</span>
+                  <div className="bg-[#FAF5EF] p-4 border border-[#D7C4B0] rounded-lg">
+                    <span className="text-[#5C4A42] block text-[10px] uppercase font-bold">Kode Pembayaran / Instruksi:</span>
+                    <span className="font-mono text-base font-bold text-[#B38E5D]">{metodeAktif.kodePay || 'Tunjukkan Email Pemesanan ke Kasir/Pengelola'}</span>
                   </div>
                 </div>
               )}
 
-              <div className="pt-4 border-t border-[#8C6943]/20 space-y-2">
-                <label className="text-xs text-stone-400 block">Upload Bukti Transfer (Opsional):</label>
+              <div className="pt-4 border-t border-slate-100 space-y-2">
+                <label className="text-xs text-[#5C4A42] font-semibold block">Upload Bukti Transfer (Opsional):</label>
                 <div className="flex items-center gap-3">
                   <input
                     type="file"
                     onChange={(e) => setBuktiTransfer(e.target.files[0])}
-                    className="text-xs text-stone-400 file:mr-4 file:py-2 file:px-4 file:border file:border-[#8C6943]/40 file:text-xs file:font-semibold file:bg-[#1A1613] file:text-stone-200 hover:file:bg-[#B48A35] hover:file:text-[#1A1613] cursor-pointer"
+                    className="text-xs text-[#5C4A42] file:mr-4 file:py-2 file:px-4 file:border file:border-[#D7C4B0] file:rounded file:text-xs file:font-semibold file:bg-[#FAF5EF] file:text-[#2D2321] hover:file:bg-[#B38E5D] hover:file:text-white cursor-pointer transition-all"
                   />
                 </div>
               </div>
@@ -285,63 +302,63 @@ export default function Pembayaran() {
 
           </div>
 
-          {/* RINGKASAN PESANAN */}
-          <div className="lg:col-span-1">
-            <div className="bg-[#1D1916] border border-[#8C6943]/30 p-6 space-y-6 sticky top-6">
-              <h2 className="text-xs font-bold uppercase tracking-widest text-[#B48A35] border-b border-[#8C6943]/20 pb-3">
+          {/* RINGKASAN PESANAN (KOLOM KANAN) */}
+          <div className="lg:col-span-1 animate-fade-up delay-200">
+            <div className="bg-white border border-[#D7C4B0] p-6 space-y-6 sticky top-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[#B38E5D] border-b border-slate-100 pb-3">
                 RINGKASAN PESANAN
               </h2>
 
-              <div>
+              <div className="overflow-hidden rounded-lg border border-[#D7C4B0]">
                 <img 
                   src={itemTransaksi.gambar} 
                   alt={itemTransaksi.namaProperti} 
-                  className="w-full h-40 object-cover border border-[#8C6943]/20"
+                  className="w-full h-40 object-cover transform hover:scale-110 transition-transform duration-700"
                 />
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-base font-serif font-bold text-stone-100">{itemTransaksi.namaProperti}</h3>
-                <p className="text-xs text-[#B48A35] font-medium">{itemTransaksi.tipeKamar}</p>
+                <h3 className="text-base font-serif font-bold text-[#2D2321]">{itemTransaksi.namaProperti}</h3>
+                <p className="text-xs text-[#B38E5D] font-medium">{itemTransaksi.tipeKamar}</p>
               </div>
 
-              <div className="space-y-2.5 text-xs text-stone-300 pt-2 border-t border-[#8C6943]/20">
+              <div className="space-y-2.5 text-xs text-[#5C4A42] pt-2 border-t border-slate-100">
                 <div className="flex justify-between">
-                  <span className="text-stone-400">Durasi Sewa:</span>
-                  <span className="font-semibold text-stone-100">{itemTransaksi.durasiSewa}</span>
+                  <span>Durasi Sewa:</span>
+                  <span className="font-semibold text-[#2D2321]">{itemTransaksi.durasiSewa}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-stone-400">Tanggal Masuk:</span>
-                  <span className="font-semibold text-stone-100">{itemTransaksi.tanggalMasuk}</span>
+                  <span>Tanggal Masuk:</span>
+                  <span className="font-semibold text-[#2D2321]">{itemTransaksi.tanggalMasuk}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-stone-400">Harga Sewa:</span>
-                  <span className="font-semibold text-stone-100">{itemTransaksi.hargaSewa}</span>
+                  <span>Harga Sewa:</span>
+                  <span className="font-semibold text-[#2D2321]">{itemTransaksi.hargaSewa}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-stone-400">Biaya Layanan:</span>
-                  <span className="font-semibold text-stone-100">{itemTransaksi.biayaLayanan}</span>
+                  <span>Biaya Layanan:</span>
+                  <span className="font-semibold text-[#2D2321]">{itemTransaksi.biayaLayanan}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-stone-400">Deposit:</span>
-                  <span className="font-semibold text-stone-100">{itemTransaksi.deposit}</span>
+                  <span>Deposit:</span>
+                  <span className="font-semibold text-[#2D2321]">{itemTransaksi.deposit}</span>
                 </div>
 
-                <div className="flex justify-between pt-4 border-t border-[#8C6943]/30 font-bold text-sm">
-                  <span className="text-stone-200">Total Tagihan:</span>
-                  <span className="text-[#B48A35]">{itemTransaksi.totalBayar}</span>
+                <div className="flex justify-between pt-4 border-t border-[#D7C4B0]/60 font-bold text-sm">
+                  <span className="text-[#2D2321]">Total Tagihan:</span>
+                  <span className="text-[#B38E5D]">{itemTransaksi.totalBayar}</span>
                 </div>
               </div>
 
               <button
                 onClick={handleKonfirmasi}
                 disabled={isProcessing}
-                className="w-full bg-[#B48A35] text-[#1A1613] font-bold py-3.5 text-xs tracking-widest uppercase hover:bg-[#9a7527] transition-all shadow-lg cursor-pointer disabled:opacity-50 mt-4"
+                className="w-full bg-[#B38E5D] text-white font-bold py-3.5 text-xs tracking-widest uppercase hover:bg-[#8F6E45] hover:-translate-y-1 hover:shadow-lg transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:hover:translate-y-0 mt-4 rounded-lg"
               >
-                {isProcessing ? "MEMPROSES..." : "KONFIRMASI & SAYA SUDAH BAYAR"}
+                {isProcessing ? "MEMPROSES..." : "KONFIRMASI PEMBAYARAN"}
               </button>
 
-              <p className="text-[10px] text-center text-stone-500 leading-relaxed">
+              <p className="text-[10px] text-center text-[#5C4A42]/80 leading-relaxed">
                 *Setelah mengonfirmasi, transaksi akan langsung tercatat LUNAS di halaman Riwayat Transaksi Anda.
               </p>
             </div>

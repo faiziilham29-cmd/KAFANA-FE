@@ -85,6 +85,8 @@ export default function Home() {
             <Link to="/carihunian" className="hover:text-[#B38E5D] transition pb-1">Cari Hunian</Link>
             <Link to="/FinanceTracker" className="hover:text-[#B38E5D] transition pb-1">Finance Tracker</Link>
             <Link to="/profile" className="hover:text-[#B38E5D] transition pb-1">Profil Saya</Link>
+            <Link to="/riwayattransaksi" className="hover:text-[#B38E5D] transition pb-1">Riwayat Transaksi</Link>
+            <Link to="/pembayaran" className="hover:text-[#B38E5D] transition pb-1">Pembayaran</Link>
           </div>
           <div>
             <Link to="/admin" className="font-sans text-xs uppercase tracking-widest font-bold bg-[#2D2321] hover:bg-[#B38E5D] text-[#FAF5EF] px-6 py-3 rounded-none transition duration-300 shadow-md">

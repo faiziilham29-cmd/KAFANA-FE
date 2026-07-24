@@ -13,8 +13,8 @@ import AdminTagihanOrder from './pages/adminTO';
 import AdminPenyewa from './pages/adminpenyewa';
 import AdminPengaturan from './pages/adminpengaturan';
 import Pembayaran from './pages/pembayaran';
-// PASTIKAN IMPORT INI ADA:
 import FinanceTracker from './pages/FinanceTracker';
+import RiwayatTransaksi from './pages/riwayattransaksi';
 
 // Placeholder untuk beranda user saja (yang finance udah dihapus)
 const BerandaUser = () => <div className="p-8 font-bold">Halaman Beranda User</div>;
@@ -35,14 +35,13 @@ export default function App() {
           
           {/* User Routes */}
           <Route path="/beranda" element={<BerandaUser />} />
-          
-          {/* 👇 INI YANG DIPERBAIKI: Panggil komponen aslinya <FinanceTracker /> */}
           <Route path="/FinanceTracker" element={<FinanceTracker />} />
-          
           <Route path="/carihunian" element={<CariHunian />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/pembayaran" element={<Pembayaran />} />
+          <Route path="/riwayattransaksi" element={<RiwayatTransaksi />} />
+
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
