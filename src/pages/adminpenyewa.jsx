@@ -43,8 +43,34 @@ export default function AdminPenyewa() {
   return (
     <div className="flex h-screen bg-[#FAF5EF] font-sans text-slate-800 overflow-hidden relative">
       
+      {/* CSS Animasi Internal */}
+      <style>
+        {`
+          @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+          .animate-fade-up {
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+          }
+          .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+          }
+          .delay-100 { animation-delay: 100ms; }
+          .delay-200 { animation-delay: 200ms; }
+          .delay-300 { animation-delay: 300ms; }
+          .delay-400 { animation-delay: 400ms; }
+          .delay-500 { animation-delay: 500ms; }
+        `}
+      </style>
+
       {/* ================= SIDEBAR ================= */}
-      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto">
+      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto animate-fade-in">
         <div>
           <div className="h-20 flex items-center px-6 border-b border-white/10">
             <div className="text-xl font-bold tracking-wide flex items-center gap-2">
@@ -85,7 +111,7 @@ export default function AdminPenyewa() {
       <main className="flex-1 flex flex-col h-full overflow-hidden">
         
         {/* HEADER */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm">
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm animate-fade-in">
           <div className="relative w-96 hidden md:block">
             <svg className="w-5 h-5 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             <input 
@@ -117,13 +143,13 @@ export default function AdminPenyewa() {
         {/* CONTENT */}
         <div className="flex-1 overflow-y-auto p-8">
           
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 animate-fade-up delay-100">
             <div>
               <h1 className="text-3xl font-bold text-[#261C19] tracking-tight">Data Penyewa</h1>
               <p className="text-slate-500 mt-1">Kelola data penghuni kost dan kontrakan yang sedang aktif.</p>
             </div>
             
-            <button className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition shadow-md shadow-[#B38E5D]/30">
+            <button className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition-all duration-300 shadow-md shadow-[#B38E5D]/30 hover:-translate-y-0.5">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
               <span>Tambah Penyewa</span>
             </button>
@@ -131,7 +157,7 @@ export default function AdminPenyewa() {
 
           {/* SUMMARY CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md flex flex-col justify-between animate-fade-up delay-200 hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
@@ -141,7 +167,7 @@ export default function AdminPenyewa() {
               <h3 className="text-3xl font-black text-[#261C19] mt-1">{totalAktif} Orang</h3>
             </div>
             
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md flex flex-col justify-between animate-fade-up delay-300 hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-amber-50 text-amber-600 rounded-lg">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
@@ -151,7 +177,7 @@ export default function AdminPenyewa() {
               <h3 className="text-3xl font-black text-[#261C19] mt-1">{totalAkanHabis} Penghuni</h3>
             </div>
             
-            <div className="bg-[#261C19] p-5 rounded-2xl border border-[#3D2D29] shadow-md flex flex-col justify-between relative overflow-hidden">
+            <div className="bg-[#261C19] p-5 rounded-2xl border border-[#3D2D29] shadow-md hover:shadow-lg flex flex-col justify-between relative overflow-hidden animate-fade-up delay-400 hover:-translate-y-1 transition-all duration-300">
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-[#B38E5D]/20 text-[#B38E5D] rounded-lg">
@@ -166,7 +192,7 @@ export default function AdminPenyewa() {
           </div>
 
           {/* TABEL DATA PENYEWA */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden animate-fade-up delay-500">
             <div className="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 bg-[#FAF5EF]/50">
               <h2 className="text-lg font-bold text-[#261C19]">Daftar Penyewa</h2>
               
@@ -175,7 +201,7 @@ export default function AdminPenyewa() {
                 <select 
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg px-3 py-1.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D]"
+                  className="bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg px-3 py-1.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D] transition-colors cursor-pointer"
                 >
                   <option value="Semua">Semua Penyewa</option>
                   <option value="Aktif">Aktif</option>
@@ -200,7 +226,7 @@ export default function AdminPenyewa() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {filteredTenants.length > 0 ? filteredTenants.map((tenant, index) => (
-                    <tr key={index} className="hover:bg-slate-50 transition">
+                    <tr key={index} className="hover:bg-slate-50 transition-colors duration-200">
                       <td className="px-6 py-4 font-bold text-[#261C19] flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-[#FAF5EF] text-[#B38E5D] border border-[#D7C4B0] flex items-center justify-center font-bold text-xs">
                           {tenant.name.charAt(0)}
@@ -212,7 +238,7 @@ export default function AdminPenyewa() {
                       <td className="px-6 py-4 text-slate-500">{tenant.entryDate}</td>
                       <td className="px-6 py-4 font-semibold text-[#B38E5D]">{tenant.endDate}</td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${
+                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm ${
                           tenant.status === 'Aktif' ? 'bg-emerald-100 text-emerald-700' :
                           tenant.status === 'Baru' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700'
                         }`}>
@@ -221,10 +247,10 @@ export default function AdminPenyewa() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-center gap-2">
-                          <button className="px-3 py-1.5 text-xs font-bold text-white bg-[#B38E5D] hover:bg-[#8F6E45] rounded transition shadow-sm" title="Lihat Profil">
+                          <button className="px-3 py-1.5 text-xs font-bold text-white bg-[#B38E5D] hover:bg-[#8F6E45] rounded transition-all duration-200 shadow-sm hover:-translate-y-0.5" title="Lihat Profil">
                             Detail
                           </button>
-                          <button className="px-3 py-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-500 hover:text-white rounded transition" title="Chat WhatsApp">
+                          <button className="px-3 py-1.5 text-xs font-bold text-emerald-600 bg-emerald-50 hover:bg-emerald-500 hover:text-white rounded transition-all duration-200 hover:-translate-y-0.5" title="Chat WhatsApp">
                             Hubungi
                           </button>
                         </div>
@@ -243,9 +269,9 @@ export default function AdminPenyewa() {
             <div className="p-5 border-t border-slate-100 flex items-center justify-between text-sm text-slate-500 bg-white">
               <div>Menampilkan {filteredTenants.length} data penyewa</div>
               <div className="flex items-center gap-1">
-                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-400">&lt;</button>
-                <button className="px-3 py-1 rounded bg-[#B38E5D] text-white font-bold">1</button>
-                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-400">&gt;</button>
+                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-400 transition-colors">&lt;</button>
+                <button className="px-3 py-1 rounded bg-[#B38E5D] text-white font-bold shadow-sm hover:-translate-y-0.5 transition-transform">1</button>
+                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 text-slate-400 transition-colors">&gt;</button>
               </div>
             </div>
             

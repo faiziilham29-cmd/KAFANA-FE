@@ -53,8 +53,34 @@ export default function AdminLaporanKeuangan() {
   return (
     <div className="flex h-screen bg-[#FAF5EF] font-sans text-slate-800 overflow-hidden relative">
       
+      {/* CSS Animasi Internal */}
+      <style>
+        {`
+          @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+          .animate-fade-up {
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+          }
+          .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+          }
+          .delay-100 { animation-delay: 100ms; }
+          .delay-200 { animation-delay: 200ms; }
+          .delay-300 { animation-delay: 300ms; }
+          .delay-400 { animation-delay: 400ms; }
+          .delay-500 { animation-delay: 500ms; }
+        `}
+      </style>
+
       {/* ================= SIDEBAR ================= */}
-      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto">
+      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto animate-fade-in">
         <div>
           <div className="h-20 flex items-center px-6 border-b border-white/10">
             <div className="text-xl font-bold tracking-wide flex items-center gap-2">
@@ -85,7 +111,7 @@ export default function AdminLaporanKeuangan() {
       <main className="flex-1 flex flex-col h-full overflow-hidden">
         
         {/* HEADER */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm">
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm animate-fade-in">
           <div className="text-lg font-bold text-[#261C19]">Laporan & Keuangan</div>
           <div className="flex items-center gap-6">
             <Link to="/profile" className="flex items-center gap-3 border-l border-slate-200 pl-6 cursor-pointer hover:opacity-80 transition">
@@ -101,7 +127,7 @@ export default function AdminLaporanKeuangan() {
         {/* CONTENT */}
         <div className="flex-1 overflow-y-auto p-8">
           
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 animate-fade-up delay-100">
             <div>
               <h1 className="text-3xl font-bold text-[#261C19] tracking-tight">Arus Kas</h1>
               <p className="text-slate-500 mt-1">Pantau pemasukan dan pengeluaran properti Anda.</p>
@@ -112,7 +138,7 @@ export default function AdminLaporanKeuangan() {
               <select 
                 value={filterMonth} 
                 onChange={(e) => setFilterMonth(e.target.value)}
-                className="bg-white border border-[#D7C4B0] text-[#261C19] text-sm font-medium rounded-lg px-4 py-2.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D]"
+                className="bg-white border border-[#D7C4B0] text-[#261C19] text-sm font-medium rounded-lg px-4 py-2.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D] transition-colors cursor-pointer"
               >
                 <option value="all">Semua Waktu</option>
                 <option value="2026-07">Juli 2026</option>
@@ -122,7 +148,7 @@ export default function AdminLaporanKeuangan() {
               <select 
                 value={filterType} 
                 onChange={(e) => setFilterType(e.target.value)}
-                className="bg-white border border-[#D7C4B0] text-[#261C19] text-sm font-medium rounded-lg px-4 py-2.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D]"
+                className="bg-white border border-[#D7C4B0] text-[#261C19] text-sm font-medium rounded-lg px-4 py-2.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D] transition-colors cursor-pointer"
               >
                 <option value="all">Semua Tipe</option>
                 <option value="income">Pemasukan Saja</option>
@@ -131,7 +157,7 @@ export default function AdminLaporanKeuangan() {
 
               <button 
                 onClick={handleExport}
-                className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition shadow-md shadow-[#B38E5D]/30"
+                className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition-all duration-300 shadow-md shadow-[#B38E5D]/30 hover:-translate-y-0.5"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                 <span>Export Laporan</span>
@@ -142,7 +168,7 @@ export default function AdminLaporanKeuangan() {
           {/* SUMMARY CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {/* Card Pemasukan */}
-            <div className="bg-white p-6 rounded-2xl border border-[#D7C4B0] shadow-sm flex flex-col justify-between">
+            <div className="bg-white p-6 rounded-2xl border border-[#D7C4B0] shadow-sm flex flex-col justify-between animate-fade-up delay-200 hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-emerald-50 rounded-lg text-emerald-600">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
@@ -153,7 +179,7 @@ export default function AdminLaporanKeuangan() {
             </div>
 
             {/* Card Pengeluaran */}
-            <div className="bg-white p-6 rounded-2xl border border-[#D7C4B0] shadow-sm flex flex-col justify-between">
+            <div className="bg-white p-6 rounded-2xl border border-[#D7C4B0] shadow-sm flex flex-col justify-between animate-fade-up delay-300 hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-2 bg-rose-50 rounded-lg text-rose-600">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"></path></svg>
@@ -164,7 +190,7 @@ export default function AdminLaporanKeuangan() {
             </div>
 
             {/* Card Saldo Bersih */}
-            <div className="bg-[#261C19] p-6 rounded-2xl border border-[#3D2D29] shadow-md flex flex-col justify-between text-white relative overflow-hidden">
+            <div className="bg-[#261C19] p-6 rounded-2xl border border-[#3D2D29] shadow-md flex flex-col justify-between text-white relative overflow-hidden animate-fade-up delay-400 hover:-translate-y-1 transition-all duration-300 hover:shadow-lg">
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-[#B38E5D]/20 rounded-lg text-[#B38E5D]">
@@ -179,7 +205,7 @@ export default function AdminLaporanKeuangan() {
           </div>
 
           {/* TABEL TRANSAKSI */}
-          <div className="bg-white rounded-2xl border border-[#D7C4B0] shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-[#D7C4B0] shadow-sm overflow-hidden animate-fade-up delay-500">
             <div className="px-6 py-5 border-b border-[#D7C4B0] bg-[#FAF5EF]">
               <h2 className="text-lg font-bold text-[#261C19]">Rincian Transaksi</h2>
             </div>
@@ -196,7 +222,7 @@ export default function AdminLaporanKeuangan() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {filteredData.length > 0 ? filteredData.map((trx) => (
-                    <tr key={trx.id} className="hover:bg-slate-50 transition">
+                    <tr key={trx.id} className="hover:bg-slate-50 transition-colors duration-200">
                       <td className="px-6 py-4 text-slate-600 font-medium">{trx.date}</td>
                       <td className="px-6 py-4 text-xs font-bold text-[#B38E5D] tracking-wider">{trx.id}</td>
                       <td className="px-6 py-4 text-[#261C19] font-medium">{trx.description}</td>

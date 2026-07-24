@@ -44,8 +44,35 @@ export default function AdminTagihanOrder() {
   return (
     <div className="flex h-screen bg-[#FAF5EF] font-sans text-slate-800 overflow-hidden relative">
       
+      {/* CSS Animasi Internal */}
+      <style>
+        {`
+          @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+          .animate-fade-up {
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+          }
+          .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+          }
+          .delay-100 { animation-delay: 100ms; }
+          .delay-200 { animation-delay: 200ms; }
+          .delay-300 { animation-delay: 300ms; }
+          .delay-400 { animation-delay: 400ms; }
+          .delay-500 { animation-delay: 500ms; }
+          .delay-600 { animation-delay: 600ms; }
+        `}
+      </style>
+
       {/* ================= SIDEBAR ================= */}
-      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto">
+      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto animate-fade-in">
         <div>
           <div className="h-20 flex items-center px-6 border-b border-white/10">
             <div className="text-xl font-bold tracking-wide flex items-center gap-2">
@@ -87,7 +114,7 @@ export default function AdminTagihanOrder() {
       <main className="flex-1 flex flex-col h-full overflow-hidden">
         
         {/* HEADER */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm">
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm animate-fade-in">
           <div className="relative w-96 hidden md:block">
             <svg className="w-5 h-5 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             <input 
@@ -117,13 +144,13 @@ export default function AdminTagihanOrder() {
         {/* CONTENT */}
         <div className="flex-1 overflow-y-auto p-8">
           
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4 animate-fade-up delay-100">
             <div>
               <h1 className="text-3xl font-bold text-[#261C19] tracking-tight">Tagihan & Order</h1>
               <p className="text-slate-500 mt-1">Kelola invoice penyewa, status pembayaran, dan pengingat.</p>
             </div>
             
-            <button className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition shadow-md shadow-[#B38E5D]/30">
+            <button className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition-all duration-300 shadow-md shadow-[#B38E5D]/30 hover:-translate-y-0.5">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
               <span>Buat Tagihan Baru</span>
             </button>
@@ -131,26 +158,26 @@ export default function AdminTagihanOrder() {
 
           {/* SUMMARY CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-[#B38E5D] transition" onClick={() => setFilterStatus("Semua")}>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-[#B38E5D] hover:-translate-y-1 transition-all duration-300 animate-fade-up delay-200" onClick={() => setFilterStatus("Semua")}>
               <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Total Tagihan (Juli)</p>
               <h3 className="text-3xl font-black text-[#261C19]">{invoices.length}</h3>
             </div>
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 transition" onClick={() => setFilterStatus("Pending")}>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:-translate-y-1 transition-all duration-300 animate-fade-up delay-300" onClick={() => setFilterStatus("Pending")}>
               <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Menunggu Pembayaran</p>
               <h3 className="text-3xl font-black text-amber-500">{totalPending}</h3>
             </div>
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-emerald-400 transition" onClick={() => setFilterStatus("Lunas")}>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 animate-fade-up delay-400" onClick={() => setFilterStatus("Lunas")}>
               <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Tagihan Lunas</p>
               <h3 className="text-3xl font-black text-emerald-500">{totalLunas}</h3>
             </div>
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-rose-400 transition" onClick={() => setFilterStatus("Jatuh Tempo")}>
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between cursor-pointer hover:border-rose-400 hover:-translate-y-1 transition-all duration-300 animate-fade-up delay-500" onClick={() => setFilterStatus("Jatuh Tempo")}>
               <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Jatuh Tempo</p>
               <h3 className="text-3xl font-black text-rose-500">{totalJatuhTempo}</h3>
             </div>
           </div>
 
           {/* TABEL DATA TAGIHAN */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden animate-fade-up delay-600">
             <div className="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4 bg-[#FAF5EF]/50">
               <h2 className="text-lg font-bold text-[#261C19]">Daftar Invoice</h2>
               
@@ -159,7 +186,7 @@ export default function AdminTagihanOrder() {
                 <select 
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
-                  className="bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg px-3 py-1.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D]"
+                  className="bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-lg px-3 py-1.5 outline-none shadow-sm focus:ring-1 focus:ring-[#B38E5D] cursor-pointer transition-colors"
                 >
                   <option value="Semua">Semua Tagihan</option>
                   <option value="Lunas">Lunas</option>
@@ -184,14 +211,14 @@ export default function AdminTagihanOrder() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {filteredInvoices.length > 0 ? filteredInvoices.map((inv, index) => (
-                    <tr key={index} className="hover:bg-slate-50 transition">
+                    <tr key={index} className="hover:bg-slate-50 transition-colors duration-200">
                       <td className="px-6 py-4 font-bold text-[#B38E5D]">{inv.id}</td>
                       <td className="px-6 py-4 font-medium text-slate-800">{inv.name}</td>
                       <td className="px-6 py-4 text-slate-600">{inv.room}</td>
                       <td className="px-6 py-4 font-semibold text-[#261C19]">{formatRupiah(inv.amount)}</td>
                       <td className="px-6 py-4 text-slate-600">{inv.dueDate}</td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${
+                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm ${
                           inv.status === 'Lunas' ? 'bg-emerald-100 text-emerald-700' :
                           inv.status === 'Jatuh Tempo' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'
                         }`}>
@@ -200,11 +227,11 @@ export default function AdminTagihanOrder() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-center gap-2">
-                          <button className="px-3 py-1.5 text-xs font-bold text-[#B38E5D] bg-[#B38E5D]/10 hover:bg-[#B38E5D] hover:text-white rounded transition">
+                          <button className="px-3 py-1.5 text-xs font-bold text-[#B38E5D] bg-[#B38E5D]/10 hover:bg-[#B38E5D] hover:text-white rounded transition-all duration-200 hover:-translate-y-0.5">
                             Detail
                           </button>
                           {inv.status !== 'Lunas' && (
-                            <button className="px-3 py-1.5 text-xs font-bold text-rose-600 bg-rose-50 hover:bg-rose-500 hover:text-white rounded transition">
+                            <button className="px-3 py-1.5 text-xs font-bold text-rose-600 bg-rose-50 hover:bg-rose-500 hover:text-white rounded transition-all duration-200 hover:-translate-y-0.5 shadow-sm">
                               Ingatkan
                             </button>
                           )}
@@ -213,7 +240,7 @@ export default function AdminTagihanOrder() {
                     </tr>
                   )) : (
                     <tr>
-                      <td colSpan="7" className="px-6 py-8 text-center text-slate-400">Tidak ada tagihan yang sesuai dengan filter.</td>
+                      <td colSpan="7" className="px-6 py-8 text-center text-slate-400 font-medium">Tidak ada tagihan yang sesuai dengan filter.</td>
                     </tr>
                   )}
                 </tbody>
@@ -224,9 +251,9 @@ export default function AdminTagihanOrder() {
             <div className="p-5 border-t border-slate-100 flex items-center justify-between text-sm text-slate-500 bg-white">
               <div>Menampilkan {filteredInvoices.length} entri data</div>
               <div className="flex items-center gap-1">
-                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50">&lt;</button>
-                <button className="px-3 py-1 rounded bg-[#B38E5D] text-white font-bold">1</button>
-                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50">&gt;</button>
+                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 transition-colors">&lt;</button>
+                <button className="px-3 py-1 rounded bg-[#B38E5D] text-white font-bold shadow-sm hover:-translate-y-0.5 transition-transform">1</button>
+                <button className="px-3 py-1 rounded border border-slate-200 hover:bg-slate-50 transition-colors">&gt;</button>
               </div>
             </div>
             

@@ -71,8 +71,39 @@ export default function AdminDataProperti() {
   return (
     <div className="flex h-screen bg-[#FAF5EF] font-sans text-slate-800 overflow-hidden relative">
       
+      {/* CSS Animasi Internal */}
+      <style>
+        {`
+          @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+          @keyframes scaleUp {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+          }
+          .animate-fade-up {
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+          }
+          .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+          }
+          .animate-scale-up {
+            animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+          }
+          .delay-100 { animation-delay: 100ms; }
+          .delay-200 { animation-delay: 200ms; }
+        `}
+      </style>
+
       {/* ================= SIDEBAR ================= */}
-      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto">
+      <aside className="w-64 bg-[#261C19] text-[#FAF5EF] flex flex-col justify-between shrink-0 h-full overflow-y-auto animate-fade-in">
         <div>
           <div className="h-20 flex items-center px-6 border-b border-white/10">
             <div className="text-xl font-bold tracking-wide flex items-center gap-2">
@@ -103,7 +134,7 @@ export default function AdminDataProperti() {
       <main className="flex-1 flex flex-col h-full overflow-hidden">
         
         {/* HEADER */}
-        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10">
+        <header className="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 animate-fade-in">
           <div className="text-lg font-bold text-slate-700">Manajemen Kamar</div>
           <div className="flex items-center gap-6">
             <Link to="/profile" className="flex items-center gap-3 border-l border-slate-200 pl-6 cursor-pointer hover:opacity-80 transition">
@@ -118,7 +149,7 @@ export default function AdminDataProperti() {
         {/* CONTENT (CRUD TABLE) */}
         <div className="flex-1 overflow-y-auto p-8">
           
-          <div className="flex justify-between items-end mb-6">
+          <div className="flex justify-between items-end mb-6 animate-fade-up delay-100">
             <div>
               <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Data Kamar</h1>
               <p className="text-slate-500 mt-1">Kelola data kamar kost dan kontrakan Anda di sini.</p>
@@ -126,7 +157,7 @@ export default function AdminDataProperti() {
             {/* TOMBOL CREATE */}
             <button 
               onClick={handleOpenAdd}
-              className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition shadow-md shadow-[#B38E5D]/30"
+              className="flex items-center gap-2 px-5 py-2.5 bg-[#B38E5D] hover:bg-[#8F6E45] text-white font-bold text-sm rounded-lg transition-all duration-300 shadow-md shadow-[#B38E5D]/30 hover:-translate-y-0.5"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
               <span>Tambah Kamar Baru</span>
@@ -134,7 +165,7 @@ export default function AdminDataProperti() {
           </div>
 
           {/* TABEL DATA KAMAR */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden animate-fade-up delay-200">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm whitespace-nowrap">
                 <thead className="bg-[#FAF5EF] text-slate-600 font-semibold border-b border-slate-200">
@@ -149,13 +180,13 @@ export default function AdminDataProperti() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {rooms.length > 0 ? rooms.map((room) => (
-                    <tr key={room.id} className="hover:bg-slate-50 transition">
+                    <tr key={room.id} className="hover:bg-slate-50 transition-colors duration-200">
                       <td className="px-6 py-4 font-bold text-slate-800">{room.name}</td>
                       <td className="px-6 py-4 text-slate-600">{room.type}</td>
                       <td className="px-6 py-4 text-slate-500 max-w-[200px] truncate">{room.facilities}</td>
                       <td className="px-6 py-4 font-semibold text-[#B38E5D]">{formatRupiah(room.price)}</td>
                       <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${
+                        <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm ${
                           room.status === 'Tersedia' ? 'bg-emerald-100 text-emerald-700' :
                           room.status === 'Terisi' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'
                         }`}>
@@ -165,11 +196,11 @@ export default function AdminDataProperti() {
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-center gap-2">
                           {/* TOMBOL UPDATE / EDIT */}
-                          <button onClick={() => handleOpenEdit(room)} className="p-2 text-slate-400 hover:text-[#B38E5D] hover:bg-slate-100 rounded transition" title="Edit">
+                          <button onClick={() => handleOpenEdit(room)} className="p-2 text-slate-400 hover:text-[#B38E5D] hover:bg-slate-200 hover:-translate-y-0.5 rounded transition-all duration-200" title="Edit">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                           </button>
                           {/* TOMBOL DELETE / HAPUS */}
-                          <button onClick={() => handleDelete(room.id)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded transition" title="Hapus">
+                          <button onClick={() => handleDelete(room.id)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-100 hover:-translate-y-0.5 rounded transition-all duration-200" title="Hapus">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                           </button>
                         </div>
@@ -189,15 +220,15 @@ export default function AdminDataProperti() {
 
       {/* ================= MODAL FORM (CREATE & UPDATE) ================= */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white w-full max-w-md rounded-2xl shadow-xl overflow-hidden animate-scale-up">
             
             {/* Header Modal */}
             <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-[#FAF5EF]">
               <h3 className="text-lg font-bold text-slate-800">
                 {formData.id ? 'Edit Data Kamar' : 'Tambah Kamar Baru'}
               </h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-rose-500 transition">
+              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-rose-500 hover:bg-white p-1 rounded-full transition-colors">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
               </button>
             </div>
@@ -207,13 +238,13 @@ export default function AdminDataProperti() {
               
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Nama / Nomor Kamar</label>
-                <input required type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Contoh: Kamar 01A" className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D]" />
+                <input required type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Contoh: Kamar 01A" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D] transition-colors" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Tipe Kamar</label>
-                  <select name="type" value={formData.type} onChange={handleChange} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D]">
+                  <select name="type" value={formData.type} onChange={handleChange} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D] transition-colors cursor-pointer">
                     <option value="Putra">Putra</option>
                     <option value="Putri">Putri</option>
                     <option value="Campur">Campur</option>
@@ -221,7 +252,7 @@ export default function AdminDataProperti() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Status</label>
-                  <select name="status" value={formData.status} onChange={handleChange} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D]">
+                  <select name="status" value={formData.status} onChange={handleChange} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D] transition-colors cursor-pointer">
                     <option value="Tersedia">Tersedia</option>
                     <option value="Terisi">Terisi</option>
                     <option value="Renovasi">Renovasi</option>
@@ -231,20 +262,20 @@ export default function AdminDataProperti() {
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Harga Sewa (Rp)</label>
-                <input required type="number" name="price" value={formData.price} onChange={handleChange} placeholder="Contoh: 1500000" className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D]" />
+                <input required type="number" name="price" value={formData.price} onChange={handleChange} placeholder="Contoh: 1500000" className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D] transition-colors" />
               </div>
 
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1">Fasilitas Utama</label>
-                <textarea required name="facilities" value={formData.facilities} onChange={handleChange} rows="2" placeholder="AC, WiFi, K. Mandi Dalam..." className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D]"></textarea>
+                <textarea required name="facilities" value={formData.facilities} onChange={handleChange} rows="2" placeholder="AC, WiFi, K. Mandi Dalam..." className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#B38E5D] transition-colors"></textarea>
               </div>
 
               {/* Footer Modal (Tombol Action) */}
-              <div className="pt-4 flex items-center justify-end gap-3">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition">
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-slate-100">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">
                   Batal
                 </button>
-                <button type="submit" className="px-4 py-2 text-sm font-bold text-white bg-[#B38E5D] hover:bg-[#8F6E45] rounded-lg transition shadow-md shadow-[#B38E5D]/30">
+                <button type="submit" className="px-5 py-2.5 text-sm font-bold text-white bg-[#B38E5D] hover:bg-[#8F6E45] rounded-lg transition-all duration-300 shadow-md shadow-[#B38E5D]/30 hover:-translate-y-0.5">
                   Simpan Data
                 </button>
               </div>
